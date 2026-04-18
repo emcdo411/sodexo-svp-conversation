@@ -1,0 +1,333 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.container{padding:1.5rem 1rem}
+.header{border-left:4px solid #8E9FD5;padding-left:1rem;margin-bottom:1.5rem}
+.header h1{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.header p{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.kpi{background:var(--color-background-secondary);border-radius:8px;padding:.85rem 1rem}
+.kpi-label{font-size:11px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.kpi-val{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.kpi-sub{font-size:11px;margin-top:3px}
+.charts-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:1.5rem}
+.chart-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:1rem}
+.chart-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.chart-sub{font-size:11px;color:var(--color-text-secondary);margin-bottom:10px}
+.chart-wrap{position:relative}
+.legend{display:flex;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)}
+.leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.verdict-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:1.5rem}
+.verdict-card{border-radius:12px;padding:1rem;border:0.5px solid var(--color-border-tertiary)}
+.verdict-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.verdict-name{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.badge{font-size:10px;padding:3px 8px;border-radius:6px;font-weight:500}
+.badge-blue{background:#E6F1FB;color:#185FA5}
+.badge-amber{background:#FAEEDA;color:#854F0B}
+.verdict-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px}
+.verdict-row:last-child{border-bottom:none}
+.verdict-dim{color:var(--color-text-secondary)}
+.verdict-score{font-weight:500;color:var(--color-text-primary)}
+.dot-green{color:#3B6D11}
+.dot-amber{color:#854F0B}
+.dot-red{color:#A32D2D}
+.insight-strip{background:var(--color-background-secondary);border-left:3px solid #8E9FD5;border-radius:0 8px 8px 0;padding:.85rem 1rem;margin-bottom:1.5rem}
+.insight-label{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--color-text-secondary);margin-bottom:4px}
+.insight-text{font-size:13px;color:var(--color-text-primary);line-height:1.6}
+.full-chart-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:1rem;margin-bottom:1.5rem}
+.tag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.tag-card{border-radius:8px;padding:.85rem;border:0.5px solid var(--color-border-tertiary)}
+.tag-head{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.tag-body{font-size:12px;color:var(--color-text-primary);line-height:1.5}
+.footer-note{font-size:11px;color:var(--color-text-secondary);text-align:center;padding-top:.5rem;border-top:0.5px solid var(--color-border-tertiary)}
+</style>
+
+<div class="container">
+<h2 class="sr-only">Sodexo vs Compass Group AI Adoption Intelligence Brief — executive comparison dashboard</h2>
+
+<div class="header">
+  <h1>Sodexo vs Compass Group — AI adoption intelligence brief</h1>
+  <p>Prepared for: pre-call with Joe Molesky, SVP Sodexo &nbsp;|&nbsp; Framework: AI Adoption Architect + EBT &nbsp;|&nbsp; April 2026</p>
+</div>
+
+<div class="kpi-grid">
+  <div class="kpi">
+    <div class="kpi-label">Sodexo AI Maturity</div>
+    <div class="kpi-val">62<span style="font-size:14px">/100</span></div>
+    <div class="kpi-sub dot-amber">Governance-strong, ops-lagging</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Compass AI Maturity</div>
+    <div class="kpi-val">74<span style="font-size:14px">/100</span></div>
+    <div class="kpi-sub dot-green">Deployment-first, governance-thin</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Compass AI Ops Coverage</div>
+    <div class="kpi-val">50<span style="font-size:14px">%</span></div>
+    <div class="kpi-sub dot-green">Active in half of all operations</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Sodexo CDIO Recognition</div>
+    <div class="kpi-val">#1</div>
+    <div class="kpi-sub dot-blue" style="color:#185FA5">Best in Data & AI award 2024</div>
+  </div>
+</div>
+
+<div class="insight-strip">
+  <div class="insight-label">The core tension — what Joe is living inside</div>
+  <div class="insight-text">Sodexo has world-class AI governance architecture and a recognized data leader. Compass has measurable margin impact from AI in production. These are not equal positions. Governance without operational deployment is overhead. Deployment without governance is drift. Joe's framing — that operations must sponsor governance — is exactly the bridge Sodexo needs and doesn't yet have.</div>
+</div>
+
+<div class="charts-grid">
+  <div class="chart-card">
+    <div class="chart-title">AI maturity by dimension</div>
+    <div class="chart-sub">Score 0–100. Threshold line = minimum viable enterprise AI.</div>
+    <div class="legend">
+      <span class="leg-item"><span class="leg-dot" style="background:#8E9FD5"></span>Sodexo</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#2D8A6B"></span>Compass</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#E24B4A;border-radius:50%"></span>Min viable threshold</span>
+    </div>
+    <div class="chart-wrap"><div style="height:260px;position:relative"><canvas id="c1" role="img" aria-label="Radar chart comparing Sodexo and Compass AI maturity across 6 dimensions">Sodexo leads in governance and data infrastructure. Compass leads in operational deployment and speed.</canvas></div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-title">Operational AI deployment — Compass vs Sodexo</div>
+    <div class="chart-sub">% of operations with active AI. Shaded band = industry watch zone (30–55%).</div>
+    <div class="legend">
+      <span class="leg-item"><span class="leg-dot" style="background:#8E9FD5"></span>Sodexo</span>
+      <span class="leg-item"><span class="leg-dot" style="background:#2D8A6B"></span>Compass</span>
+    </div>
+    <div class="chart-wrap"><div style="height:260px;position:relative"><canvas id="c2" role="img" aria-label="Line chart showing AI deployment growth from 2021 to 2026 for Sodexo and Compass">Compass reaches 50% AI operations coverage by 2025. Sodexo trails at roughly 22%.</canvas></div></div>
+  </div>
+</div>
+
+<div class="full-chart-card">
+  <div class="chart-title">Head-to-head: six dimensions that matter to a COO</div>
+  <div class="chart-sub">Where each company actually stands — and what it means for margin and risk. FRED-style recession band = critical gap zone.</div>
+  <div class="legend" style="margin-bottom:10px">
+    <span class="leg-item"><span class="leg-dot" style="background:#8E9FD5"></span>Sodexo</span>
+    <span class="leg-item"><span class="leg-dot" style="background:#2D8A6B"></span>Compass</span>
+    <span class="leg-item"><span style="width:12px;height:10px;background:rgba(226,75,74,0.12);display:inline-block;border-radius:2px;margin-right:3px"></span>Critical gap zone</span>
+  </div>
+  <div style="height:280px;position:relative"><canvas id="c3" role="img" aria-label="Horizontal grouped bar chart comparing Sodexo and Compass across 6 operational AI dimensions">Compass outscores Sodexo in deployment speed, margin impact, and operational AI breadth. Sodexo leads in governance architecture and data infrastructure.</canvas></div>
+</div>
+
+<div class="verdict-grid">
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <span class="verdict-name">Sodexo</span>
+      <span class="badge badge-blue">Governance-first</span>
+    </div>
+    <div class="verdict-row"><span class="verdict-dim">Governance architecture</span><span class="verdict-score dot-green">Strong</span></div>
+    <div class="verdict-row"><span class="verdict-dim">CDIO / data leadership</span><span class="verdict-score dot-green">Award-winning</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Operational AI deployment</span><span class="verdict-score dot-amber">Lagging (~22% coverage)</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Ops-to-governance bridge</span><span class="verdict-score dot-red">Gap — no clear owner</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Margin impact from AI</span><span class="verdict-score dot-amber">Unclear / not publicized</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Speed of iteration</span><span class="verdict-score dot-amber">Moderate</span></div>
+  </div>
+
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <span class="verdict-name">Compass Group</span>
+      <span class="badge badge-amber">Deployment-first</span>
+    </div>
+    <div class="verdict-row"><span class="verdict-dim">Governance architecture</span><span class="verdict-score dot-amber">Developing</span></div>
+    <div class="verdict-row"><span class="verdict-dim">CDIO / data leadership</span><span class="verdict-score dot-amber">Not publicly recognized</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Operational AI deployment</span><span class="verdict-score dot-green">Leading (~50% coverage)</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Ops-to-governance bridge</span><span class="verdict-score dot-amber">Ops-driven by default</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Margin impact from AI</span><span class="verdict-score dot-green">Measurable, cited publicly</span></div>
+    <div class="verdict-row"><span class="verdict-dim">Speed of iteration</span><span class="verdict-score dot-green">Fast</span></div>
+  </div>
+</div>
+
+<div class="full-chart-card" style="margin-bottom:1rem">
+  <div class="chart-title">FAANG benchmark — Amazon vs enterprise services AI</div>
+  <div class="chart-sub">Amazon is the relevant FAANG anchor here. AWS powers both companies' infrastructure. Amazon Business and Whole Foods ops set the deployment pace benchmark.</div>
+  <div class="legend" style="margin-bottom:10px">
+    <span class="leg-item"><span class="leg-dot" style="background:#8E9FD5"></span>Sodexo</span>
+    <span class="leg-item"><span class="leg-dot" style="background:#2D8A6B"></span>Compass</span>
+    <span class="leg-item"><span class="leg-dot" style="background:#E24B4A"></span>Amazon benchmark</span>
+  </div>
+  <div style="height:220px;position:relative"><canvas id="c4" role="img" aria-label="Bar chart comparing Sodexo, Compass, and Amazon benchmark across 4 AI capability areas">Amazon dramatically outpaces both on deployment speed and feedback loop velocity. Both companies lag significantly on real-time adaptation.</canvas></div>
+</div>
+
+<div class="tag-grid">
+  <div class="tag-card">
+    <div class="tag-head">What Joe already knows</div>
+    <div class="tag-body">Governance without an ops sponsor is theater. He said it. That's the CES gap language without the framework name attached to it.</div>
+  </div>
+  <div class="tag-card">
+    <div class="tag-head">The question to ask Joe</div>
+    <div class="tag-body">"If Sodexo's AI criteria drift from market conditions tomorrow — who gets the call, and how fast does it close?"</div>
+  </div>
+  <div class="tag-card">
+    <div class="tag-head">Your positioning in this call</div>
+    <div class="tag-body">You're the person who built a framework that names the gap Joe is already living. You're not selling — you're validating his instinct with structure.</div>
+  </div>
+</div>
+
+<div class="footer-note">Intelligence brief — Epoch Frameworks LLC &nbsp;|&nbsp; AI Adoption Architect + EBT v2.6 &nbsp;|&nbsp; Not for distribution</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const SODEXO = '#8E9FD5';
+const COMPASS = '#2D8A6B';
+const RED = '#E24B4A';
+const BAND = 'rgba(226,75,74,0.10)';
+const GRID = 'rgba(128,128,128,0.12)';
+const TICK = '#888';
+
+Chart.defaults.font.family = 'var(--font-sans)';
+Chart.defaults.font.size = 11;
+Chart.defaults.color = TICK;
+
+const recessionPlugin = {
+  id:'recession',
+  beforeDraw(chart,args,opts){
+    if(!opts||!opts.yMin&&opts.yMin!==0) return;
+    const {ctx,chartArea,scales}=chart;
+    const yMin=scales.y.getPixelForValue(opts.yMin);
+    const yMax=scales.y.getPixelForValue(opts.yMax);
+    ctx.save();
+    ctx.fillStyle=opts.color||'rgba(226,75,74,0.10)';
+    ctx.fillRect(chartArea.left,Math.min(yMin,yMax),chartArea.right-chartArea.left,Math.abs(yMax-yMin));
+    ctx.restore();
+  }
+};
+const recessionHorizPlugin = {
+  id:'recessionH',
+  beforeDraw(chart,args,opts){
+    if(!opts||!opts.xMin&&opts.xMin!==0) return;
+    const {ctx,chartArea,scales}=chart;
+    const x1=scales.x.getPixelForValue(opts.xMin);
+    const x2=scales.x.getPixelForValue(opts.xMax);
+    ctx.save();
+    ctx.fillStyle=opts.color||'rgba(226,75,74,0.10)';
+    ctx.fillRect(Math.min(x1,x2),chartArea.top,Math.abs(x2-x1),chartArea.bottom-chartArea.top);
+    ctx.restore();
+  }
+};
+Chart.register(recessionPlugin, recessionHorizPlugin);
+
+new Chart(document.getElementById('c1'),{
+  type:'radar',
+  data:{
+    labels:['Governance','Data Infrastructure','Ops Deployment','Speed','Margin Impact','Leadership Alignment'],
+    datasets:[
+      {label:'Sodexo',data:[85,78,22,45,38,60],borderColor:SODEXO,backgroundColor:'rgba(142,159,213,0.15)',pointBackgroundColor:SODEXO,borderWidth:2,pointRadius:4},
+      {label:'Compass',data:[48,62,74,80,72,65],borderColor:COMPASS,backgroundColor:'rgba(45,138,107,0.12)',pointBackgroundColor:COMPASS,borderWidth:2,pointRadius:4},
+      {label:'Min viable',data:[55,55,55,55,55,55],borderColor:RED,backgroundColor:'transparent',pointBackgroundColor:RED,borderWidth:1.5,borderDash:[4,4],pointRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:10},backdropColor:'transparent'},grid:{color:GRID},angleLines:{color:GRID},pointLabels:{font:{size:11}}}}
+  }
+});
+
+new Chart(document.getElementById('c2'),{
+  type:'line',
+  data:{
+    labels:['2021','2022','2023','2024','2025','2026 est.'],
+    datasets:[
+      {label:'Sodexo',data:[5,9,13,17,22,26],borderColor:SODEXO,backgroundColor:'rgba(142,159,213,0.08)',fill:true,tension:0.4,borderWidth:2.5,pointRadius:4,pointBackgroundColor:SODEXO},
+      {label:'Compass',data:[10,18,28,38,50,58],borderColor:COMPASS,backgroundColor:'rgba(45,138,107,0.08)',fill:true,tension:0.4,borderWidth:2.5,pointRadius:4,pointBackgroundColor:COMPASS}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      recessionPlugin:{yMin:30,yMax:55,color:'rgba(226,75,74,0.08)'},
+      annotation:{},
+      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}%`}}
+    },
+    scales:{
+      x:{grid:{color:GRID},ticks:{color:TICK}},
+      y:{min:0,max:80,grid:{color:GRID},ticks:{color:TICK,callback:v=>v+'%'}}
+    }
+  },
+  plugins:[{
+    id:'bandDraw',
+    beforeDraw(chart){
+      const {ctx,chartArea,scales}=chart;
+      const y1=scales.y.getPixelForValue(55);
+      const y2=scales.y.getPixelForValue(30);
+      ctx.save();
+      ctx.fillStyle='rgba(226,75,74,0.09)';
+      ctx.fillRect(chartArea.left,y1,chartArea.right-chartArea.left,y2-y1);
+      ctx.strokeStyle='rgba(226,75,74,0.35)';
+      ctx.lineWidth=1;
+      ctx.setLineDash([4,4]);
+      ctx.beginPath();ctx.moveTo(chartArea.left,y1);ctx.lineTo(chartArea.right,y1);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(chartArea.left,y2);ctx.lineTo(chartArea.right,y2);ctx.stroke();
+      ctx.restore();
+    }
+  }]
+});
+
+new Chart(document.getElementById('c3'),{
+  type:'bar',
+  data:{
+    labels:['Governance\nArchitecture','Data\nInfrastructure','Ops AI\nDeployment','Margin\nImpact','Iteration\nSpeed','Ops-Gov\nBridge'],
+    datasets:[
+      {label:'Sodexo',data:[85,78,22,38,45,30],backgroundColor:'rgba(142,159,213,0.85)',borderColor:SODEXO,borderWidth:1},
+      {label:'Compass',data:[48,62,74,72,80,58],backgroundColor:'rgba(45,138,107,0.80)',borderColor:COMPASS,borderWidth:1}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}/100`}}
+    },
+    scales:{
+      x:{grid:{color:GRID},ticks:{color:TICK,maxRotation:0}},
+      y:{min:0,max:100,grid:{color:GRID},ticks:{color:TICK,callback:v=>v},title:{display:true,text:'Score (0–100)',color:TICK,font:{size:10}}}
+    }
+  },
+  plugins:[{
+    id:'critBand',
+    beforeDraw(chart){
+      const {ctx,chartArea,scales}=chart;
+      const y1=scales.y.getPixelForValue(55);
+      const y2=scales.y.getPixelForValue(35);
+      ctx.save();
+      ctx.fillStyle='rgba(226,75,74,0.09)';
+      ctx.fillRect(chartArea.left,y1,chartArea.right-chartArea.left,y2-y1);
+      ctx.strokeStyle='rgba(226,75,74,0.4)';
+      ctx.lineWidth=1;
+      ctx.setLineDash([5,4]);
+      ctx.beginPath();ctx.moveTo(chartArea.left,y1);ctx.lineTo(chartArea.right,y1);ctx.stroke();
+      ctx.restore();
+    }
+  }]
+});
+
+new Chart(document.getElementById('c4'),{
+  type:'bar',
+  data:{
+    labels:['Real-time\nAdaptation','Feedback Loop\nVelocity','Ops AI\nBreadth','Governance\nMaturity'],
+    datasets:[
+      {label:'Sodexo',data:[28,35,22,85],backgroundColor:'rgba(142,159,213,0.85)',borderColor:SODEXO,borderWidth:1},
+      {label:'Compass',data:[58,65,74,48],backgroundColor:'rgba(45,138,107,0.80)',borderColor:COMPASS,borderWidth:1},
+      {label:'Amazon benchmark',data:[92,95,88,78],backgroundColor:'rgba(226,75,74,0.75)',borderColor:RED,borderWidth:1}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}/100`}}
+    },
+    scales:{
+      x:{grid:{color:GRID},ticks:{color:TICK,maxRotation:0}},
+      y:{min:0,max:100,grid:{color:GRID},ticks:{color:TICK},title:{display:true,text:'Score (0–100)',color:TICK,font:{size:10}}}
+    }
+  }
+});
+</script>

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sodexo AI Governance to Operations Bridge | Executive Brief</title>
+  <meta name="description" content="Executive briefing for a Sodexo operations and governance discussion focused on AI deployment, ownership, and operational execution." />
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --surface: #ffffff;
+      --surface-2: #eef0f8;
+      --text: #1a1d20;
+      --muted: #6b7280;
+      --border: rgba(45, 52, 54, 0.12);
+      --brand: #8E9FD5;
+      --charcoal: #2D3436;
+      --green: #2D8A6B;
+      --red: #E24B4A;
+      --amber: #C0890A;
+      --shadow: 0 10px 30px rgba(26, 29, 32, 0.08);
+      --radius: 16px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 248, 252, 0.9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner,
+    .section-inner,
+    .hero-inner,
+    .footer-inner {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 70px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-kicker {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav a:hover { color: var(--charcoal); }
+
+    .hero {
+      background: linear-gradient(180deg, var(--charcoal) 0%, #394144 100%);
+      color: white;
+      border-bottom: 4px solid var(--brand);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      padding: 56px 0 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--brand);
+      display: inline-block;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: rgba(255,255,255,0.76);
+      font-size: 17px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    }
+
+    .hero-card h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+
+    .hero-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 16px;
+    }
+
+    .score {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .score-value {
+      font-size: 46px;
+      line-height: 1;
+      font-weight: 800;
+      color: white;
+    }
+
+    .score-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.56);
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(142,159,213,0.14);
+      color: #eef1ff;
+      border: 1px solid rgba(142,159,213,0.28);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section {
+      padding: 56px 0;
+    }
+
+    .section-alt {
+      background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(238,240,248,0.7));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 3.5vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--charcoal);
+    }
+
+    .section-head p {
+      max-width: 760px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--charcoal);
+      white-space: nowrap;
+    }
+
+    .grid-3, .grid-2, .metrics-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .metrics-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3, .card h4 {
+      margin: 0 0 10px;
+      color: var(--charcoal);
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .metric-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: var(--brand);
+    }
+
+    .metric-card.green::before { background: var(--green); }
+    .metric-card.red::before { background: var(--red); }
+    .metric-card.amber::before { background: var(--amber); }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: 34px;
+      line-height: 1;
+      color: var(--charcoal);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .metric-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      padding: 16px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    th {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: var(--surface-2);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .signal.red { background: rgba(226,75,74,0.1); color: #a92f2e; }
+    .signal.green { background: rgba(45,138,107,0.12); color: #1f6f57; }
+    .signal.amber { background: rgba(192,137,10,0.12); color: #8b6508; }
+    .signal.brand { background: rgba(142,159,213,0.16); color: #4e5fa0; }
+
+    .quote {
+      border-left: 4px solid var(--brand);
+      padding: 18px 20px;
+      background: var(--surface);
+      border-radius: 0 16px 16px 0;
+      box-shadow: var(--shadow);
+      color: var(--charcoal);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-week {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+
+    .timeline-item h3 {
+      margin: 0 0 6px;
+      color: var(--charcoal);
+    }
+
+    .timeline-item ul,
+    .card ul {
+      margin: 10px 0 0 20px;
+      color: var(--muted);
+    }
+
+    .list-tight li { margin: 6px 0; }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover { transform: translateY(-1px); opacity: 0.96; }
+    .button.primary { background: var(--brand); color: white; }
+    .button.secondary { background: var(--surface); color: var(--charcoal); border-color: var(--border); }
+
+    .footer {
+      padding: 26px 0 44px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner,
+      .grid-2,
+      .grid-3,
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item { grid-template-columns: 1fr; }
+      .topbar-inner { align-items: flex-start; padding: 12px 0; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { display: none; }
+      .hero-inner { padding: 44px 0 40px; }
+      .section { padding: 44px 0; }
+      .metric-value { font-size: 30px; }
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-kicker">Executive Brief</span>
+        <span class="brand-title">Sodexo AI Governance to Operations Bridge</span>
+      </div>
+      <nav class="nav">
+        <a href="#context">Context</a>
+        <a href="#tension">Tension</a>
+        <a href="#comparison">Comparison</a>
+        <a href="#tracks">Discussion</a>
+        <a href="#sprint">Sprint</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Executive Discussion Brief x Operator Lens</div>
+        <h1>Sodexo’s opportunity is not whether governance exists. It is whether <span style="color: var(--brand);">governance moves through operations</span> fast enough to become real.</h1>
+        <p>
+          This page translates the repo into a guided executive view focused on one core question: where does the gap between governance sophistication and operational deployment actually live, and who owns closing it at enterprise scale?
+        </p>
+        <div class="pill-row">
+          <span class="pill">Sodexo</span>
+          <span class="pill">Compass</span>
+          <span class="pill">Operations Sponsorship</span>
+          <span class="pill">AI Governance</span>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h3>Current positioning</h3>
+        <div class="score">
+          <span class="score-value">62</span>
+          <span class="score-label">Sodexo AI Maturity</span>
+        </div>
+        <p>
+          Signal suggests a governance-strong posture with visible operating-model opportunity. By contrast, Compass appears further ahead on deployment velocity, but with more governance exposure.
+        </p>
+        <div class="status-chip">Core thesis · Governance without operations sponsorship becomes theater</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="context">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Context from the repo</div>
+          <h2>This is built as a working discussion environment, not a pitch deck.</h2>
+          <p>
+            The repo is already structured around context, the core question, operator insight, gap analysis, discussion areas, and a possible four-week sprint. The page below turns that file structure into a cleaner operating narrative for executive consumption.
+          </p>
+        </div>
+        <div class="badge-row">
+          <span class="badge">Comparison, not presentation</span>
+          <span class="badge">Operator-level dialogue</span>
+          <span class="badge">Decision architecture</span>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>What is already clear</h3>
+          <p>Sodexo has strong governance signals, recognized leadership in data and AI, and serious structural intent.</p>
+        </article>
+        <article class="card">
+          <h3>What remains open</h3>
+          <p>The last-mile question is whether governance is sufficiently sponsored through operations to create embedded use, trust, and decision velocity.</p>
+        </article>
+        <article class="card">
+          <h3>Why this matters</h3>
+          <p>At enterprise scale, governance quality alone does not create operational adoption. The bridge layer determines whether AI becomes a system or just a signal.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="tension">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Core tension</div>
+          <h2>Sodexo and Compass are not solving the same problem from the same side.</h2>
+          <p>
+            Sodexo appears governance-heavy and operationally constrained. Compass appears deployment-forward and structurally more exposed. These are not equivalent positions. They are two incomplete systems approaching the same enterprise AI problem from opposite ends.
+          </p>
+        </div>
+      </div>
+
+      <div class="quote">
+        Governance without operational sponsorship becomes theater. Deployment without governance becomes drift.
+      </div>
+
+      <div class="metrics-grid" style="margin-top: 20px;">
+        <div class="card metric-card">
+          <div class="metric-label">Sodexo maturity</div>
+          <div class="metric-value">62</div>
+          <div class="metric-note">Governance-strong, ops-lagging signal.</div>
+        </div>
+        <div class="card metric-card green">
+          <div class="metric-label">Compass maturity</div>
+          <div class="metric-value">74</div>
+          <div class="metric-note">Deployment-forward, governance-thin signal.</div>
+        </div>
+        <div class="card metric-card amber">
+          <div class="metric-label">Compass ops coverage</div>
+          <div class="metric-value">50%</div>
+          <div class="metric-note">AI active in roughly half of operations.</div>
+        </div>
+        <div class="card metric-card red">
+          <div class="metric-label">Sodexo risk</div>
+          <div class="metric-value">Lag</div>
+          <div class="metric-note">Execution velocity may trail structural capability.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="comparison">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Comparative positioning</div>
+          <h2>The competitive question is not who has AI. It is who has turned AI into an operating model.</h2>
+          <p>
+            The repo’s central comparison is useful because it isolates the difference between governance architecture and embedded operational use. That difference is where executive attention belongs.
+          </p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Sodexo</th>
+              <th>Compass</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AI maturity</td>
+              <td><span class="signal brand">62 / 100</span></td>
+              <td><span class="signal green">74 / 100</span></td>
+            </tr>
+            <tr>
+              <td>Core strength</td>
+              <td><span class="signal brand">Governance architecture</span></td>
+              <td><span class="signal green">Operational deployment</span></td>
+            </tr>
+            <tr>
+              <td>Primary exposure</td>
+              <td><span class="signal amber">Execution lag</span></td>
+              <td><span class="signal red">Governance drift</span></td>
+            </tr>
+            <tr>
+              <td>Ownership challenge</td>
+              <td><span class="signal amber">Bridge layer undefined</span></td>
+              <td><span class="signal amber">Control layer pressure</span></td>
+            </tr>
+            <tr>
+              <td>Strategic implication</td>
+              <td><span class="signal brand">Needs operator sponsorship</span></td>
+              <td><span class="signal green">Needs governance hardening</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="operator">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Operator insight</div>
+          <h2>The repo’s most important line is also the simplest: closing the gap in governance must be sponsored through operations.</h2>
+          <p>
+            That statement changes the frame. Governance is no longer treated as a top-down control layer first. It becomes a downstream function of workflow reality, operator trust, and decision accountability.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Implication one</h3>
+          <p>Governance must be informed by execution, not isolated from it.</p>
+        </article>
+        <article class="card">
+          <h3>Implication two</h3>
+          <p>Operations must own feedback loops, trust calibration, and decision accountability if sponsorship is real.</p>
+        </article>
+        <article class="card">
+          <h3>Implication three</h3>
+          <p>Without an operator owner, governance remains structurally present but behaviorally weak.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="breaks">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Where systems break</div>
+          <h2>The failure pattern is consistent across enterprises.</h2>
+          <p>
+            The repo isolates four recurring breakpoints that are useful because they move the conversation away from abstract AI talk and toward observable operating reality.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Failure stack</h3>
+          <ul class="list-tight">
+            <li>Governance has no embedded operator owner</li>
+            <li>AI outputs lack workflow integration</li>
+            <li>Criteria drift goes undetected</li>
+            <li>Decision latency increases over time</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>What AI becomes</h3>
+          <p>Without a stronger bridge layer, AI tends to become measured, reported, and audited, but not trusted, embedded, or relied upon.</p>
+        </article>
+      </div>
+
+      <div class="quote" style="margin-top: 20px;">
+        Scale does not create these weaknesses. It exposes them.
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="tracks">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Discussion tracks</div>
+          <h2>This repo is strongest when used to drive focused executive dialogue.</h2>
+          <p>
+            Rather than forcing a conclusion, the structure is designed to surface where the operating model is currently strongest, where it is weakest, and what kind of bridge is actually required.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>1. Where does ownership live?</h3>
+          <p>Who owns AI-assisted decisions today, and who is accountable when outputs fail in live operations?</p>
+        </article>
+        <article class="card">
+          <h3>2. What breaks at scale?</h3>
+          <p>What fails first as AI expands across the enterprise: trust, workflow, governance, or decision speed?</p>
+        </article>
+        <article class="card">
+          <h3>3. How is the gap closed?</h3>
+          <p>What would operations-sponsored governance actually look like inside Sodexo’s execution environment?</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sprint">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">4 week sprint</div>
+          <h2>The repo already suggests a practical path forward if the discussion moved beyond comparison.</h2>
+          <p>
+            The sprint concept is useful because it is bounded, diagnostic, and operational. It does not assume a platform rebuild. It focuses on ownership, friction, operator pathways, and validation.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-week">Week 1</div>
+          <div>
+            <h3>System mapping</h3>
+            <ul class="list-tight">
+              <li>Map governance-to-execution pathways</li>
+              <li>Identify ownership gaps and decision bottlenecks</li>
+              <li>Establish the current operating baseline</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-week">Week 2</div>
+          <div>
+            <h3>Friction identification</h3>
+            <ul class="list-tight">
+              <li>Surface workflow-level breakdowns</li>
+              <li>Identify where AI fails to convert into action</li>
+              <li>Map trust and adoption barriers</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-week">Week 3</div>
+          <div>
+            <h3>Operator layer design</h3>
+            <ul class="list-tight">
+              <li>Define an operations-sponsored governance model</li>
+              <li>Embed ownership into workflow pathways</li>
+              <li>Design feedback and decision-routing mechanisms</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-week">Week 4</div>
+          <div>
+            <h3>Validation</h3>
+            <ul class="list-tight">
+              <li>Test the model against live scenarios</li>
+              <li>Validate movement in decision velocity and friction reduction</li>
+              <li>Clarify next-step options without overcommitting scope</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="repo">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Repo access</div>
+          <h2>The GitHub repo remains the deeper working environment behind this executive view.</h2>
+          <p>
+            The page is designed to create clarity quickly. The repo holds the fuller context, folder structure, and markdown discussion layers that support a longer working conversation.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Primary actions</h3>
+          <div class="button-row">
+            <a class="button primary" href="https://github.com/emcdo411/sodexo-svp-conversation" target="_blank" rel="noopener noreferrer">Open repo ↗</a>
+            <a class="button secondary" href="https://github.com/emcdo411/sodexo-svp-conversation/blob/main/README.md" target="_blank" rel="noopener noreferrer">Read README ↗</a>
+          </div>
+          <div style="margin-top:14px; font-size:12px; color:var(--muted); line-height:1.5;">
+            Direct links if needed:<br>
+            <span style="word-break:break-all;">https://github.com/emcdo411/sodexo-svp-conversation</span><br>
+            <span style="word-break:break-all;">https://github.com/emcdo411/sodexo-svp-conversation/blob/main/README.md</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Repo structure</h3>
+          <p>
+            Context, core question, operator lens, gap analysis, discussion areas, sprint framing, and appendix materials are already separated cleanly inside the repo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Sodexo AI Governance to Operations Bridge · Executive discussion layer</span>
+      <span>Built from the public repo narrative for GitHub Pages deployment</span>
+    </div>
+  </footer>
+</body>
+</html>
